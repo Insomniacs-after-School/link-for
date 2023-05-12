@@ -1,1 +1,1 @@
-console.log("DB");
+console.log('DB');
