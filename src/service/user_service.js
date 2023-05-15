@@ -21,10 +21,13 @@ const getAllUsers = async () => {
   }
 };
 
-const getUserById = async (id) => {
+const getUserByEmail = async (email) => {
   try {
-    const user = await User.findOne({ where: { id } });
-    return user;
+    const user = await User.findOne({ where: { email } });
+    return {
+      email: user.dataValues.email,
+      password: user.dataValues.password,
+    };
   } catch (error) {
     return error;
   }
@@ -58,7 +61,7 @@ const deleteUserById = async (id) => {
 module.exports = {
   createUser,
   getAllUsers,
-  getUserById,
+  getUserByEmail,
   updateUserById,
   deleteUserById,
 };
