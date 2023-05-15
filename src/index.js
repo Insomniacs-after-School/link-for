@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const { checkConnectionDB } = require('./db/connection');
 
 const PORT = 9000;
@@ -15,6 +16,9 @@ app.use(bodyParser.json());
 
 // cors middleware
 app.use(cors());
+
+// middleware cookie-parser
+app.use(cookieParser());
 
 // routing
 app.use('/register', require('./routes/register'));

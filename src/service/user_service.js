@@ -1,8 +1,16 @@
 const User = require('../model/User');
 
-const createUser = async (email, username, password) => {
+const createUser = async (email, username, authentication) => {
   try {
-    const user = await User.create({ email, username, password });
+    const { password, salt } = authentication.authentication;
+
+    const user = await User.create({
+      email,
+      username,
+      password,
+      salt,
+    });
+
     return {
       id: user.dataValues.id,
       username: user.dataValues.username,
@@ -27,6 +35,8 @@ const getUserByEmail = async (email) => {
     return {
       email: user.dataValues.email,
       password: user.dataValues.password,
+      salt: user.dataValues.salt,
+      id: user.dataValues.id,
     };
   } catch (error) {
     return error;
@@ -49,6 +59,21 @@ const updateUserById = async (id, email, username, password) => {
   }
 };
 
+const setSessionToken = async (id, sessionToken) => {
+  try {
+    const token = await User.update({ sessionToken }, { where: { id } });
+
+    if (!token) {
+      return new Error();
+    }
+
+    const result = await User.findOne({ where: { id } });
+    return result.dataValues.sessionToken;
+  } catch (error) {
+    return error;
+  }
+};
+
 const deleteUserById = async (id) => {
   try {
     const user = await User.destroy({ where: { id } });
@@ -64,4 +89,5 @@ module.exports = {
   getUserByEmail,
   updateUserById,
   deleteUserById,
+  setSessionToken,
 };

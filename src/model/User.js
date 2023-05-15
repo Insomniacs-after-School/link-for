@@ -34,6 +34,12 @@ User.init({
     type: DataTypes.STRING,
     defaultValue: new Date().toDateString(),
   },
+  salt: {
+    type: DataTypes.STRING,
+  },
+  sessionToken: {
+    type: DataTypes.STRING,
+  },
 }, {
   // Other model options go here
   sequelize, // We need to pass the connection instance
