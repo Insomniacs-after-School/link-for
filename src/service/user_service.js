@@ -43,6 +43,23 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const getUSerBySessionToken = async (sessionToken) => {
+  try {
+    const user = await User.findOne({ where: { sessionToken } });
+    return {
+      username: user.dataValues.username,
+      email: user.dataValues.email,
+      authentication: {
+        password: user.dataValues.password,
+        salt: user.dataValues.salt,
+        sessionToken: user.dataValues.sessionToken,
+      },
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 const updateUserById = async (id, email, username, password) => {
   try {
     const user = await User.update({
@@ -90,4 +107,5 @@ module.exports = {
   updateUserById,
   deleteUserById,
   setSessionToken,
+  getUSerBySessionToken,
 };
