@@ -1,10 +1,27 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 const { sequelize } = require('../db/connection');
 
-class User extends Model { }
+// const { Sequelize, DataTypes } = require('sequelize');
+// const sequelize = new Sequelize('sqlite::memory:');
 
-User.init({
+// const User = sequelize.define('User', {
+//   // Model attributes are defined here
+//   firstName: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   lastName: {
+//     type: DataTypes.STRING
+//     // allowNull defaults to true
+//   }
+// }, {
+//   // Other model options go here
+// });
+
+// // `sequelize.define` also returns the model
+// console.log(User === sequelize.models.User); // true
+const User = sequelize.define('User', {
   // Model attributes are defined here
   id: {
     type: DataTypes.CHAR(36),
@@ -40,10 +57,6 @@ User.init({
   sessionToken: {
     type: DataTypes.STRING,
   },
-}, {
-  // Other model options go here
-  sequelize, // We need to pass the connection instance
-  modelName: 'User', // We need to choose the model name
 });
 
 // the defined model is the class itself

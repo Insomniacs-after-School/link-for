@@ -17,7 +17,7 @@ const registerHandler = async (req, res) => {
       },
     });
 
-    console.log(data);
+    // res.redirect('/login');
     response(200, 'success', { message: 'register ready', data }, res);
   }
 };
