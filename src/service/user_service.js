@@ -1,6 +1,6 @@
-const User = require('../model/User');
+const { User } = require('../model/User');
 
-const createUser = async (email, username, authentication) => {
+const createUser = async (email, username, authentication, dataId) => {
   try {
     const { password, salt } = authentication.authentication;
 
@@ -9,13 +9,17 @@ const createUser = async (email, username, authentication) => {
       username,
       password,
       salt,
+      dataId,
     });
+
+    console.log(user);
 
     return {
       id: user.dataValues.id,
       username: user.dataValues.username,
     };
   } catch (error) {
+    console.log(error);
     return error;
   }
 };
@@ -37,13 +41,26 @@ const getUserByEmail = async (email) => {
       password: user.dataValues.password,
       salt: user.dataValues.salt,
       id: user.dataValues.id,
+      dataId: user.dataValues.dataId,
     };
   } catch (error) {
     return error;
   }
 };
 
-const getUSerBySessionToken = async (sessionToken) => {
+const getUserEmailByDataId = async (dataId) => {
+  try {
+    const user = await User.findOne({ where: { dataId } });
+    return {
+      username: user.dataValues.username,
+      email: user.dataValues.email,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
+const getUserBySessionToken = async (sessionToken) => {
   try {
     const user = await User.findOne({ where: { sessionToken } });
     return {
@@ -107,5 +124,6 @@ module.exports = {
   updateUserById,
   deleteUserById,
   setSessionToken,
-  getUSerBySessionToken,
+  getUserBySessionToken,
+  getUserEmailByDataId,
 };

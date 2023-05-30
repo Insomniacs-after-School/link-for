@@ -27,7 +27,7 @@ const loginHandler = async (req, res) => {
         const TOKEN = await setSessionToken(userIsExist.id, authentication(salt, userIsExist.id));
 
         res.cookie('LINKFOR-AUTH', TOKEN, { domain: 'localhost', path: '/' });
-        response(200, 'success', { message: 'login ready', data: { id: userIsExist.id, auth: TOKEN } }, res);
+        response(200, 'success', { message: 'login ready', data: { id: userIsExist.id, dataId: userIsExist.dataId, auth: TOKEN } }, res);
       } else {
         response(401, 'failed', { message: 'username atau password tidak ditemukan!' }, res);
       }

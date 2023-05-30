@@ -1,6 +1,6 @@
 const { merge } = require('lodash');
 const response = require('../helpers/response');
-const { getUSerBySessionToken } = require('../service/user_service');
+const { getUserBySessionToken } = require('../service/user_service');
 
 const isAuthenticated = async (req, res, next) => {
   try {
@@ -10,7 +10,7 @@ const isAuthenticated = async (req, res, next) => {
       return response(403, 'failed', { message: 'silahkan login!' }, res);
     }
 
-    const existingUser = await getUSerBySessionToken(sessionToken);
+    const existingUser = await getUserBySessionToken(sessionToken);
 
     if (!existingUser) {
       return response(403, 'failed', { message: 'sesi berakhir!' }, res);
