@@ -1,4 +1,5 @@
 const { User } = require('../model/User');
+const { getDataById } = require('./datas_service');
 
 const createUser = async (email, username, authentication, dataId) => {
   try {
@@ -28,6 +29,17 @@ const getAllUsers = async () => {
   try {
     const users = await User.findAll();
     return users;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getDataByUsername = async (username) => {
+  try {
+    const user = await User.findOne({ where: { username } });
+    const { dataId } = user.dataValues;
+    const result = await getDataById(dataId);
+    return result;
   } catch (error) {
     return error;
   }
@@ -126,4 +138,5 @@ module.exports = {
   setSessionToken,
   getUserBySessionToken,
   getUserEmailByDataId,
+  getDataByUsername,
 };
