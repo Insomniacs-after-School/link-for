@@ -75,6 +75,9 @@ const getUserEmailByDataId = async (dataId) => {
 const getUserBySessionToken = async (sessionToken) => {
   try {
     const user = await User.findOne({ where: { sessionToken } });
+    if (!user) {
+      return false;
+    }
     return {
       username: user.dataValues.username,
       email: user.dataValues.email,
