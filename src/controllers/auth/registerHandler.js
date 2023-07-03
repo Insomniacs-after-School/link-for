@@ -1,8 +1,8 @@
-const response = require('../helpers/response');
-const { createUser } = require('../service/user_service');
-const { random, authentication } = require('../helpers/utils');
-const { addFirstData } = require('../service/datas_service');
-const { User } = require('../model/User');
+const response = require('../../helpers/response');
+const { createUser } = require('../../service/user_service');
+const { random, authentication } = require('../../helpers/utils');
+const { addFirstData } = require('../../service/datas_service');
+const { User } = require('../../model/User');
 
 const registerHandler = async (req, res) => {
   const { email, username, password } = req.body;

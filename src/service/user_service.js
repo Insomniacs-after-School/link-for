@@ -13,8 +13,6 @@ const createUser = async (email, username, authentication, dataId) => {
       dataId,
     });
 
-    console.log(user);
-
     return {
       id: user.dataValues.id,
       username: user.dataValues.username,

@@ -1,6 +1,6 @@
-const response = require('../helpers/response');
-const { getUserByEmail, setSessionToken } = require('../service/user_service');
-const { random, authentication } = require('../helpers/utils');
+const response = require('../../helpers/response');
+const { getUserByEmail, setSessionToken } = require('../../service/user_service');
+const { random, authentication } = require('../../helpers/utils');
 
 const loginHandler = async (req, res) => {
   const { email, password } = req.body;
