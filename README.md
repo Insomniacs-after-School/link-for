@@ -61,7 +61,7 @@
 ### Dasboard (Authorized)
 
 - Method: `GET`
-- URL: `/dashboard/{id}`
+- URL: `/dashboard/{dataId}`
 - Response
 
 ```json
@@ -83,7 +83,7 @@
 ```
 
 - Method: `PUT`
-- URL: `/dashboard/{id}`
+- URL: `/dashboard/{dataId}`
 - Request Body
 
 ```json
@@ -95,9 +95,15 @@
     { "link_2": "ini adalah link 2" },
     { "link_3": "ini adalah link 3" }
   ],
-  "bio": "bio singkat"
+  "bio": "b1556224-a210-4e3f-b42a-f3d8d3b8660abio singkab1556224-a210-4e3f-b42a-f3d8d3b8660at"
 }
 ```
+
+### logout (button)
+
+- Method: `DELETE`
+- URL: `/dashboard/{dataId}`
+- Response Status: `204`
 
 ### Link-For Link (Public)
 
